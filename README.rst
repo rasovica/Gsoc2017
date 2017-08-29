@@ -32,11 +32,17 @@ Ip space module
 
 This was my first task. I had to create a module for nodewatcher which
 would draw a map of all the networks, something similar to
-`this <https://xkcd.com/195/>`__. I started off slow as I had very little
+`this <https://xkcd.com/195/>`__. The module was needed because some huge networks had no idea,
+which ip space was used and which was not, this map would give a better idea of how much space is left,
+and how it is structured. I started off slow as I had very little
 experience with django, it took me about a week to even find where all
 the modules where defined and how to implement a new one. Once I
 actually got to program in html/javascript, my work progressed very
-quickly, I was basically done with it around mid summer.
+quickly, I was basically done with it around mid summer. While working i noticed that the 10.0.0.0/8 network is huge,
+compared to the small nodes, you could barely see the nodes, this is why I also added the ability to zoom to top-level nodes,
+which adds extra clarity to how the nodes are distributed. The positioning is calculated using the hilbert curve, which is a way to map 1d,
+numbers to 2d space. It works great for numbers that are power of 2. The drawing is done using d3.js which is good at handling huge amounts of data,
+and displaying it in a svg form, which enabled me to implement zoom with ease.
 
 Problems I had
 ~~~~~~~~~~~~~~
@@ -60,7 +66,11 @@ Mainpage
 This task on the other hand had a really fast start and it ground to a halt
 when I started to work on Django. My task was to revive a project not
 touched in years still using virtualenv and old pil library which
-hasn't been maintained in 10 years. Having been in a struggle with docker
+hasn't been maintained in 10 years. The wlan-slo webpage is a great starting point for,
+anyone trying to starting making meshed wifi nodes, being abandoned for so long, some of the pages
+functionality was not operational, this would mean that people who wanted to join the community would,
+be deterred from doing so. The webpage is split in two containers, one holding the postgresql database for
+the webpage the other having the webpage served using uwsgi for djnago and nginx for static files. Having been in a struggle with docker
 in my previous task I was afraid my lack of docker is gonna slow me down
 but it was quite the opposite. I managed to create both containers in a
 week or so, but having to struggle when it came to django.
